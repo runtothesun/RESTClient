@@ -989,6 +989,11 @@ restclient.main = {
       });
       $('#response-headers .header-name').width(maxWidth + 10);
       //$('#response-headers .header-value').css('margin-left', maxWidth + 20 + 'px');
+      
+      /* xDebug part */
+      $('#response-xdebug div.pre').html(headers["X-Wf-1-1-1-1"]);
+      
+      
     }
   },
   updateProgressBar: function (idx, status) {
@@ -1029,6 +1034,7 @@ restclient.main = {
     restclient.main.setResponseHeader();
     $("#response-body-preview div.pre").addClass('overflow');
     $('#response-body-highlight pre').empty().removeClass('KelpJSONView').addClass('prettyprint linenums');
+    $('#response-xdebug dev.pre').html('');
   },
   checkMimeType: function () {
     var contentType = this.xhr.getResponseHeader("Content-Type");
