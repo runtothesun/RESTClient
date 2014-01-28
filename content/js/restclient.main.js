@@ -979,6 +979,29 @@ restclient.main = {
           .append($('<span class="header-split"></span>').text(': '))
           .append(valHtml)
         );
+        
+        
+        if(name.substring(0,11) == "X-Wf-1-1-1-") {
+        	//alert(name);
+	        var res = val.split("|");
+	        var obj = JSON.parse(res[1]);
+	        $('#response-xdebug pre').append($('<div><b>'+obj[0]["Label"]+'</b></div>'));
+	        var valTable = $("<table class='table'></table>");
+
+	        for (var i=0;i<obj[1].length;i++) {
+	        	var tr=$('<tr></tr>');
+	        	for (var i2=0;i2<obj[1][i].length;i2++) {
+		        	var td = $('<td>'+obj[1][i][i2]+'</td>');
+		        	tr.append(td);
+		        }
+		        valTable.append(tr);
+	        }
+	        
+	        //alert(valTable.html());
+	        $('#response-xdebug pre').append(valTable);
+	        $('#response-xdebug pre').append('<div style="float: left; clear: both;"></div>');
+        }
+        
 
         ol.append(li);
       }
@@ -990,8 +1013,7 @@ restclient.main = {
       $('#response-headers .header-name').width(maxWidth + 10);
       //$('#response-headers .header-value').css('margin-left', maxWidth + 20 + 'px');
       
-      /* xDebug part */
-      $('#response-xdebug div.pre').html(headers["X-Wf-1-1-1-1"]);
+
       
       
     }
@@ -1034,7 +1056,7 @@ restclient.main = {
     restclient.main.setResponseHeader();
     $("#response-body-preview div.pre").addClass('overflow');
     $('#response-body-highlight pre').empty().removeClass('KelpJSONView').addClass('prettyprint linenums');
-    $('#response-xdebug dev.pre').html('');
+    $('#response-xdebug div.pre').html('');
   },
   checkMimeType: function () {
     var contentType = this.xhr.getResponseHeader("Content-Type");
