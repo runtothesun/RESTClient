@@ -1056,7 +1056,7 @@ restclient.main = {
     restclient.main.setResponseHeader();
     $("#response-body-preview div.pre").addClass('overflow');
     $('#response-body-highlight pre').empty().removeClass('KelpJSONView').addClass('prettyprint linenums');
-    $('#response-xdebug div.pre').html('');
+    $('#response-xdebug pre').text('');
   },
   checkMimeType: function () {
     var contentType = this.xhr.getResponseHeader("Content-Type");
